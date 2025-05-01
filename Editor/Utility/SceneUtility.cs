@@ -124,7 +124,7 @@ namespace UnityEditor.Polybrush
                 Vector3.zero,
                 -1);
 
-            if(SystemInfo.supportsComputeShaders)
+            if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor)
                 return MeshRaycast_ComputeShader(InRay, mesh, out hit);
             else
                 return MeshRaycast_Legacy(InRay, mesh.vertices, mesh.GetTriangles(), out hit);

@@ -72,7 +72,7 @@ namespace UnityEditor.Polybrush
                 TargetColors = new Color[colorLength];
                 EraseColors = new Color[colorLength];
 
-                if(SystemInfo.supportsComputeShaders)
+                if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor)
                 {
                     DisposeBuffers();
 
@@ -104,7 +104,7 @@ namespace UnityEditor.Polybrush
                 }
 
 
-                if(SystemInfo.supportsComputeShaders)
+                if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor)
                 {
                     TargetColorsBuffer.SetData(TargetColors);
                     EraseColorsBuffer.SetData(EraseColors);
@@ -115,7 +115,7 @@ namespace UnityEditor.Polybrush
             {
                 System.Array.Copy(Colors, OriginalColors, Colors.Length);
 
-                if(SystemInfo.supportsComputeShaders)
+                if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor)
                     OriginalColorsBuffer.SetData(OriginalColors);
             }
 
@@ -426,7 +426,7 @@ namespace UnityEditor.Polybrush
 
                 default:
                 {
-                    if(SystemInfo.supportsComputeShaders && colorLerpShader != null)
+                    if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor && colorLerpShader != null)
                     {
                         int kernelIndex = colorLerpShader.FindKernel("ColorLerpKernel");
 
@@ -489,7 +489,7 @@ namespace UnityEditor.Polybrush
 
             data.LikelySupportsVertexColors = true;
 
-            if(SystemInfo.supportsComputeShaders)
+            if(SystemInfo.supportsComputeShaders && !Application.platform == RuntimePlatform.OSXEditor)
                 data.MeshVertexColors.DisposeBuffers();
 
             m_EditableObjectsData.Remove(target);
